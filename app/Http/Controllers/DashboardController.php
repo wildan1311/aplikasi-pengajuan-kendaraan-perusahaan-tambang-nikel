@@ -10,8 +10,8 @@ class DashboardController extends Controller
     public function index(){
         $detailPesananKendaraan = DB::table('pesan')
                                             ->join('kendaraan', 'pesan.kendaraan_id', '=', 'kendaraan.id')
-                                            ->select(DB::raw('count(*) as total, MONTH(tanggal_pesan) as month'), 'kendaraan.nama_kendaraan', 'kendaraan.jenis_kendaraan', 'kendaraan.id','pesan.tanggal_pesan')
-                                            ->groupBy('month', 'kendaraan_id');
+                                            ->select(DB::raw('count(*) as total'), 'kendaraan.nama_kendaraan', 'kendaraan.jenis_kendaraan', 'kendaraan.id','pesan.tanggal_pesan')
+                                            ->groupBy('kendaraan_id');
 
         // buat chart
         $chartPesanan = $detailPesananKendaraan->pluck('total', 'nama_kendaraan');

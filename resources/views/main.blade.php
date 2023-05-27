@@ -47,6 +47,9 @@
             </div>
         </div>
     </div>
+
+    {{$chartPesanan->keys()}}
+    {{$chartPesanan->values()}}
 @endsection
 
 @push('chartjs')
