@@ -6,6 +6,7 @@ use App\Models\ApproveModel;
 use App\Models\KendaraanModel;
 use App\Models\PesanModel;
 use App\Models\User;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 
 class PengajuanKendaraanController extends Controller
@@ -74,13 +75,15 @@ class PengajuanKendaraanController extends Controller
                 $approve->status = $request->status;
             }else{
                 $approve->status = 'waiting';
-                return redirect('/approve-pengajuan')->with('message', "Menunggu level 1 melakukan approve");
+                \RealRashid\SweetAlert\Facades\Alert::error('Err', 'Menunggu level 1 melakukan approve');
+                return redirect('/approve-pengajuan')->with('error', "Menunggu level 1 melakukan approve");
             }
         }
 
         ApproveModel::find($id)->update([
             'status' => $request->status
         ]);
+        \RealRashid\SweetAlert\Facades\Alert::success('Success', 'Pengajuan Diapprove');
 
         return redirect('/approve-pengajuan');
     }
