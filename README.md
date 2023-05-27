@@ -72,4 +72,6 @@ Ada syarat untuk melakukan approval, yaitu user dengan approval priority pertama
 
 <a href="https://drive.google.com/file/d/1O0rtM459SyLwRtmd6blG21olHF_eMYBe/view?usp=share_link">Activity Diagram</a>
 
+<a href="https://drive.google.com/file/d/1Vr3nlw_8daEK6WBF9gySsE6fXdyuBu5F/view?usp=share_link">Database</a>
+
 ##
