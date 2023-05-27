@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Kendaraan;
@@ -7,6 +8,7 @@ use App\Http\Controllers\PengajuanKendaraanController;
 use App\Models\ApproveModel;
 use App\Models\PesanModel;
 use Illuminate\Support\Facades\DB;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,33 +22,11 @@ use Illuminate\Support\Facades\DB;
 */
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        // Buat tabel
-        $detailPesananKendaraan = DB::table('pesan')
-                                            ->join('kendaraan', 'pesan.kendaraan_id', '=', 'kendaraan.id')
-                                            ->select(DB::raw('count(*) as total, MONTH(tanggal_pesan) as month'), 'kendaraan.nama_kendaraan', 'kendaraan.jenis_kendaraan', 'kendaraan.id','pesan.tanggal_pesan')
-                                            ->groupBy('month', 'kendaraan_id');
-
-        // buat chart
-        $chartPesanan = $detailPesananKendaraan->pluck('total', 'nama_kendaraan');
-        $tablePesanan = $detailPesananKendaraan->get();
-
-        return view('main', [
-            'chartPesanan' => $chartPesanan,
-            'tablePesanan' => $tablePesanan
-        ]);
-    });
+    Route::get('/', [DashboardController::class, 'index']);
 
     Route::post('/form-pengajuan', [PengajuanKendaraanController::class, 'create']);
     Route::get('/form-pengajuan', [PengajuanKendaraanController::class, 'index']);
-
-    Route::get('/approve-pengajuan', function () {
-        $approve = ApproveModel::with('pesan')->where('user_id', Auth()->id())->get();
-        return view('approvePengajuan', [
-            'approve' => $approve,
-        ]);
-    });
-
+    Route::get('/approve-pengajuan', [PengajuanKendaraanController::class, 'approvePage']);
     Route::put('/approve-pengajuan/{id}', [PengajuanKendaraanController::class, 'update']);
 
     Route::get('/kendaraan', [Kendaraan::class, 'index']);

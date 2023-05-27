@@ -87,4 +87,11 @@ class PengajuanKendaraanController extends Controller
 
         return redirect('/approve-pengajuan');
     }
+
+    public function approvePage(){
+        $approve = ApproveModel::with('pesan')->where('user_id', Auth()->id())->get();
+        return view('approvePengajuan', [
+            'approve' => $approve,
+        ]);
+    }
 }
