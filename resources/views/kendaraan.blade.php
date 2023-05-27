@@ -13,7 +13,6 @@
                         <th>Nama Kendaraan</th>
                         <th>Jenis Kendaraan</th>
                         <th>Nomor Polisi</th>
-                        <th>Tersedia</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -24,7 +23,6 @@
                         <td>{{$kendaraan->nama_kendaraan}}</td>
                         <td>{{$kendaraan->jenis_kendaraan}}</td>
                         <td>{{$kendaraan->no_plat}}</td>
-                        <td>{{$kendaraan->total}}</td>
                         <td><a href="/detail-kendaraan/{{$kendaraan->id}}" class="btn btn-primary">Detail</a></td>
                     </tr>
                     @endforeach
