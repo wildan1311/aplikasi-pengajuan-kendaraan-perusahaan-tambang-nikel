@@ -5,10 +5,6 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Kendaraan;
 use App\Http\Controllers\PengajuanKendaraanController;
-use App\Models\ApproveModel;
-use App\Models\PesanModel;
-use Illuminate\Support\Facades\DB;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
